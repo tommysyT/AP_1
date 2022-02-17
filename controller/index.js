@@ -45,29 +45,8 @@ module.exports = {
     },
 
     
-    selectAllUtilisateur : async ( _ , res) => {
-
-        await call (res, async (connection) => {
-            const result = await connection.query("CALL selectAllUtilisateur()");
-            return res.status(200).json({ success : result })
-        })
-    },
-        // let connection;
-    
-        // try {
-        //         connection = await pool.getConnection();
-        //         const result = await connection.query ('CALL selectAllUtilisateur;');
-        
-        //         return res.status(200).json ( { success: result } );
-        //     } catch (error) {
-            
-        //         return res.status(400).json( {error: error.message});                   
-        //     } finally {
-        //             if (connection) connection.end()                                            
-        //     }
-    // },
     updateUtilisateur : async (req, res) =>{
-
+        
         let connection;
         
         try {
@@ -77,27 +56,28 @@ module.exports = {
             const result = await connection.query('CALL update_utilisateur (?,?);', [id, sexe]);
 
             return res.status(200).json ( { success: result } );
-
+            
         } catch (error) {
-
+            
             return res.status(400).json( {error: error.message});                   
-
+            
         } finally {
             if (connection) connection.end()                                        
         }
     },
-
+    
     deleteUtilisateur : async (req, res) => {
+        
+        const { id } = req.params
         
         let connection;
         
         try {
-            const { id } = req.params
 
             connection = await pool.getConnection();
-
+            
             const result = await connection.query('CALL delete_utilisateur(?);', [ id ]);
-
+            
             return res.status(200).json( {success : result });
             
         } catch (error) 
@@ -107,6 +87,28 @@ module.exports = {
         } finally {
             if (connection) connection.end()                                        
         }
-            
+        
     },
+    getAllUtilisateur : async ( _ , res) => {
+        
+        let connection;
+        
+        try {
+
+            connection = await pool.getConnection();
+            
+            const result = await connection.query('CALL get_all_utilisateur();');
+            
+            return res.status(200).json( {success : result });
+            
+        } catch (error) 
+        
+        {return res.status(400).json( {error: error.message});                   
+
+        } finally {
+            if (connection) connection.end()                                        
+        }
+        
+    },
+  
 }

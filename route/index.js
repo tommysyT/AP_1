@@ -1,7 +1,7 @@
 const router = require('express-promise-router')();         // utilisation du module pour la creation de routes
 
 
-const { test, insertUtilisateur, deleteUtilisateur, selectAllUtilisateur, updateUtilisateur } =  require('../controller/index');
+const { test, insertUtilisateur, deleteUtilisateur, updateUtilisateur, getAllUtilisateur } =  require('../controller/index');
 
 
 router
@@ -9,13 +9,13 @@ router
 
 router
     .route('/test')
-    .get(test)
-    .get(selectAllUtilisateur)
-
-router
+    // .get(test)
+    
+    router
     .route('/user')
     .post(insertUtilisateur)
     .put(updateUtilisateur)
+    .get(getAllUtilisateur)
     
 router
     .route('/user/:id')

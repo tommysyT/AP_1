@@ -32,33 +32,8 @@ BEGIN
     id_utilisateur = p_id_utilisateur;
 END //
 
--- DELIMITER //
 
--- CREATE OR REPLACE selectAllUtilisateur (
---     IN p_id_utilisateur INT
---     IN p_nom VARCHAR (255)
---     IN p_prenom VARCHAR (255)
---     IN p_ddn DATE 
---     IN p_sexe VARCHAR (1)
---     IN p_ville VARCHAR (255)
---     IN p_pays VARCHAR (255)
---     IN p_mobile VARCHAR (15)
---     IN p_email VARCHAR (255)
--- )
--- BEGIN
---     SELECT * FROM utilisateur ( id_utilisateur, nom, prenom, ddn, sexe, ville,pays, mobile, email) 
---     WHERE (
---     id_utilisateur = p_id_utilisateur,
---     nom = p_nom,
---     prenom = p_prenom,
---     ddn = p_ddn,
---     sexe = p_sexe,
---     ville = p_ville,
---     pays = p_pays,
---     mobile = p_mobile,
---     email =p_email);
 
---     END //
 
 CREATE OR REPLACE PROCEDURE update_utilisateur (
     IN p_id_utilisateur INT,
@@ -90,4 +65,11 @@ BEGIN
     -- psswd = p_psswd
     WHERE 
     id_utilisateur = p_id_utilisateur;
+END //
+
+
+CREATE OR REPLACE PROCEDURE get_all_utilisateur()
+BEGIN
+    SELECT * FROM utilisateur ;
+
 END //
