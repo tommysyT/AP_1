@@ -73,3 +73,38 @@ BEGIN
     SELECT * FROM utilisateur ;
 
 END //
+
+CREATE OR REPLACE PROCEDURE insert_commentaire (
+    IN p_commentaire VARCHAR(255)
+)
+
+BEGIN
+    INSERT INTO commentaire ( commentaire )
+    VALUES (p_commentaire);
+END //
+
+CREATE OR REPLACE PROCEDURE get_all_commentaire()
+BEGIN
+    SELECT * FROM commentaire ;
+END //
+
+CREATE OR REPLACE PROCEDURE delete_commentaire (
+    IN p_id_commentaire INT
+)
+BEGIN
+    DELETE FROM commentaire 
+    WHERE
+    id_commentaire = p_id_commentaire;
+END //
+
+CREATE OR REPLACE PROCEDURE update_commentaire (
+    IN p_id_commentaire INT,
+    IN p_commentaire VARCHAR(255)
+)
+BEGIN
+    UPDATE commentaire 
+    SET
+    commentaire = p_commentaire
+    WHERE 
+    id_commentaire = p_id_commentaire;
+END //
