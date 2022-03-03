@@ -132,6 +132,7 @@ module.exports = {
             if (connection) connection.end()                                        
         }
     },
+
     getAllCommentaire : async ( _ , res) => {
         
         let connection;
@@ -197,4 +198,49 @@ module.exports = {
             if (connection) connection.end()                                        
         }
     },
+
+    insertDateTest : async (req, res) =>{
+
+        const { date, id_coach } = req.body;
+        let connection;
+        
+        try {
+            connection = await pool.getConnection();
+            
+            const result = await connection.query('CALL insert_date_test (?,?);', [ date, id_coach ]);
+
+            return res.status(200).json ( { success: result } );
+
+
+        } catch (error) {
+
+            return res.status(400).json( {error: error.message});                   
+
+        } finally {
+            if (connection) connection.end()                                        
+        }
+    },
+
+    insertUtilisateurSeanceTest : async (req, res) =>{
+
+        const { id, nom, prenom, id_seance_test } = req.body;
+        let connection;
+        
+        try {
+            connection = await pool.getConnection();
+            
+            const result = await connection.query('CALL insert_utilisateur_seance_test (?,?,?,?);', [id, nom, prenom, id_seance_test]);
+
+            return res.status(200).json ( { success: result } );
+
+
+        } catch (error) {
+
+            return res.status(400).json( {error: error.message});                   
+
+        } finally {
+            if (connection) connection.end()                                        
+        }
+    },
+
 }

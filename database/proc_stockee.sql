@@ -108,3 +108,25 @@ BEGIN
     WHERE 
     id_commentaire = p_id_commentaire;
 END //
+
+CREATE OR REPLACE PROCEDURE insert_date_test (
+    IN p_date_seance DATE,
+    IN p_id_coach INT
+)
+
+BEGIN
+    INSERT INTO seance_test ( date_seance, id_coach )
+    VALUES ( p_date_seance, p_id_coach );
+END //
+
+CREATE OR REPLACE PROCEDURE insert_utilisateur_seance_test (
+    IN p_id_utilisateur INT,
+    IN p_nom VARCHAR (255),
+    IN p_prenom VARCHAR (255),
+    IN p_id_seance_test INT
+   
+)
+BEGIN
+    INSERT INTO inscription (id_utilisateur, nom, prenom, id_seance_test)
+    VALUES (p_id_utilisateur, p_nom, p_prenom, p_id_seance_test);
+END //
